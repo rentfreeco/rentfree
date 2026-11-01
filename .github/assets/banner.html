@@ -1,0 +1,180 @@
+<!doctype html>
+<!--
+  The README's banner, rendered to banner.png at twice its size:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+      --hide-scrollbars --force-device-scale-factor=2 --window-size=1280,568 \
+      --default-background-color=00000000 --virtual-time-budget=10000 \
+      --screenshot=banner.png banner.html
+
+  The colours, type, and terminal are rentfree.dev's landing page, a little
+  larger so they read at the README's width. The letters are the page's SVG
+  of the CLI's `rf init` banner, packages/cli/src/banner.ts.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>rentfree banner</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=Geist+Mono:wght@400&display=block"
+    />
+    <style>
+      :root {
+        --ink: #0b0c0f;
+        --panel: #14161b;
+        --line: #262a33;
+        --text: #f2f4f8;
+        --muted: #8d93a0;
+        --face: #60a5fa;
+        --deep: #2563eb;
+        --mono: "Geist Mono", ui-monospace, monospace;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 1280px;
+        height: 568px;
+        background: transparent;
+        overflow: hidden;
+      }
+      .card {
+        position: relative;
+        width: 1280px;
+        height: 568px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse 60% 70% at 50% 100%, rgba(37, 99, 235, 0.14), transparent 70%),
+          var(--ink);
+        color: var(--text);
+        font-family: "Geist", system-ui, sans-serif;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 76px;
+        padding: 0 40px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 25px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+      }
+      .what {
+        color: var(--muted);
+        font-size: 19px;
+        letter-spacing: -0.01em;
+      }
+      .terminal {
+        position: absolute;
+        left: 50%;
+        top: 128px;
+        width: 1010px;
+        transform: translateX(-50%);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+      .titleBar {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        height: 46px;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      .titleBar span {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #ff5f57;
+      }
+      .titleBar span:nth-child(2) {
+        background: #febc2e;
+      }
+      .titleBar span:nth-child(3) {
+        background: #28c840;
+      }
+      .screen {
+        padding: 24px 32px 120px;
+        font-family: var(--mono);
+        font-size: 19px;
+        line-height: 1.6;
+      }
+      .prompt,
+      .slogan,
+      .frameLabel {
+        white-space: pre;
+      }
+      .prompt {
+        color: var(--face);
+      }
+      .prompt::before {
+        content: "$ ";
+        color: var(--muted);
+      }
+      .frame {
+        position: relative;
+        margin: 18px 0 0;
+        padding: 34px 40px 36px;
+        border: 1px solid var(--deep);
+        border-left-style: dashed;
+        border-right-style: dashed;
+        border-radius: 12px;
+      }
+      .art {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .slogan {
+        margin-top: 20px;
+        color: var(--face);
+      }
+      .frameLabel {
+        position: absolute;
+        right: 30px;
+        bottom: -0.75em;
+        padding: 0 10px;
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <header>
+        <span class="brand"><img src="icon.svg" alt="" />rentfree</span>
+        <span class="what">Memory for AI agents</span>
+      </header>
+      <div class="terminal">
+        <div class="titleBar"><span></span><span></span><span></span></div>
+        <div class="screen">
+          <div class="prompt">rf init</div>
+          <div class="frame">
+            <svg class="art" viewBox="0 0 670 120" role="img" aria-label="rentfree"><path d="M0 0h60v20h-60zM80 0h70v20h-70zM160 0h30v20h-30zM230 0h20v20h-20zM260 0h80v20h-80zM350 0h70v20h-70zM430 0h60v20h-60zM510 0h70v20h-70zM590 0h70v20h-70zM0 20h20v20h-20zM50 20h20v20h-20zM80 20h20v20h-20zM160 20h40v20h-40zM230 20h20v20h-20zM290 20h20v20h-20zM350 20h20v20h-20zM430 20h20v20h-20zM480 20h20v20h-20zM510 20h20v20h-20zM590 20h20v20h-20zM0 40h60v20h-60zM80 40h50v20h-50zM160 40h20v20h-20zM190 40h20v20h-20zM230 40h20v20h-20zM290 40h20v20h-20zM350 40h50v20h-50zM430 40h60v20h-60zM510 40h50v20h-50zM590 40h50v20h-50zM0 60h20v20h-20zM50 60h20v20h-20zM80 60h20v20h-20zM160 60h20v20h-20zM200 60h20v20h-20zM230 60h20v20h-20zM290 60h20v20h-20zM350 60h20v20h-20zM430 60h20v20h-20zM480 60h20v20h-20zM510 60h20v20h-20zM590 60h20v20h-20zM0 80h20v20h-20zM50 80h20v20h-20zM80 80h70v20h-70zM160 80h20v20h-20zM210 80h40v20h-40zM290 80h20v20h-20zM350 80h20v20h-20zM430 80h20v20h-20zM480 80h20v20h-20zM510 80h70v20h-70zM590 80h70v20h-70z" fill="#60a5fa" shape-rendering="crispEdges"/><path d="M60 7.5H67V20M60 12.5H63V20M150 7.5H157V20M150 12.5H153V20M190 7.5H197V20M190 12.5H193V20M250 7.5H257V20M250 12.5H253V20M340 7.5H347V20M340 12.5H343V20M420 7.5H427V20M420 12.5H423V20M490 7.5H497V20M490 12.5H493V20M580 7.5H587V20M580 12.5H583V20M660 7.5H667V20M660 12.5H663V20M30 27.5H23V40M30 32.5H27V40M30 27.5H40M30 32.5H40M40 27.5H50M40 32.5H50M70 27.5H77V40M70 32.5H73V40M110 27.5H103V40M110 32.5H107V40M110 27.5H120M110 32.5H120M120 27.5H130M120 32.5H130M130 27.5H140M130 32.5H140M140 27.5H150M140 32.5H150M157 20V32.5H150M153 20V27.5H150M200 27.5H207V40M200 32.5H203V40M253 20V40M257 20V40M263 20V32.5H270M267 20V27.5H270M270 27.5H280M270 32.5H280M280 27.5H290M280 32.5H290M320 27.5H313V40M320 32.5H317V40M320 27.5H330M320 32.5H330M330 27.5H340M330 32.5H340M347 20V32.5H340M343 20V27.5H340M380 27.5H373V40M380 32.5H377V40M380 27.5H390M380 32.5H390M390 27.5H400M390 32.5H400M400 27.5H410M400 32.5H410M410 27.5H420M410 32.5H420M427 20V32.5H420M423 20V27.5H420M460 27.5H453V40M460 32.5H457V40M460 27.5H470M460 32.5H470M470 27.5H480M470 32.5H480M500 27.5H507V40M500 32.5H503V40M540 27.5H533V40M540 32.5H537V40M540 27.5H550M540 32.5H550M550 27.5H560M550 32.5H560M560 27.5H570M560 32.5H570M570 27.5H580M570 32.5H580M587 20V32.5H580M583 20V27.5H580M620 27.5H613V40M620 32.5H617V40M620 27.5H630M620 32.5H630M630 27.5H640M630 32.5H640M640 27.5H650M640 32.5H650M650 27.5H660M650 32.5H660M667 20V32.5H660M663 20V27.5H660M70 47.5H63V60M70 52.5H67V60M77 40V52.5H70M73 40V47.5H70M130 47.5H137V60M130 52.5H133V60M190 47.5H183V60M190 52.5H187V60M210 47.5H217V60M210 52.5H213V60M253 40V60M257 40V60M313 40V60M317 40V60M400 47.5H407V60M400 52.5H403V60M500 47.5H493V60M500 52.5H497V60M507 40V52.5H500M503 40V47.5H500M560 47.5H567V60M560 52.5H563V60M640 47.5H647V60M640 52.5H643V60M30 67.5H23V80M30 72.5H27V80M30 67.5H40M30 72.5H40M40 67.5H50M40 72.5H50M70 67.5H77V80M70 72.5H73V80M110 67.5H103V80M110 72.5H107V80M110 67.5H120M110 72.5H120M120 67.5H130M120 72.5H130M137 60V72.5H130M133 60V67.5H130M183 60V80M187 60V80M193 60V72.5H200M197 60V67.5H200M220 67.5H227V80M220 72.5H223V80M253 60V80M257 60V80M313 60V80M317 60V80M380 67.5H373V80M380 72.5H377V80M380 67.5H390M380 72.5H390M390 67.5H400M390 72.5H400M407 60V72.5H400M403 60V67.5H400M460 67.5H453V80M460 72.5H457V80M460 67.5H470M460 72.5H470M470 67.5H480M470 72.5H480M500 67.5H507V80M500 72.5H503V80M540 67.5H533V80M540 72.5H537V80M540 67.5H550M540 72.5H550M550 67.5H560M550 72.5H560M567 60V72.5H560M563 60V67.5H560M620 67.5H613V80M620 72.5H617V80M620 67.5H630M620 72.5H630M630 67.5H640M630 72.5H640M647 60V72.5H640M643 60V67.5H640M23 80V100M27 80V100M73 80V100M77 80V100M150 87.5H157V100M150 92.5H153V100M183 80V100M187 80V100M203 80V92.5H210M207 80V87.5H210M253 80V100M257 80V100M313 80V100M317 80V100M373 80V100M377 80V100M453 80V100M457 80V100M503 80V100M507 80V100M580 87.5H587V100M580 92.5H583V100M660 87.5H667V100M660 92.5H663V100M3 100V112.5H10M7 100V107.5H10M10 107.5H20M10 112.5H20M27 100V112.5H20M23 100V107.5H20M53 100V112.5H60M57 100V107.5H60M60 107.5H70M60 112.5H70M77 100V112.5H70M73 100V107.5H70M83 100V112.5H90M87 100V107.5H90M90 107.5H100M90 112.5H100M100 107.5H110M100 112.5H110M110 107.5H120M110 112.5H120M120 107.5H130M120 112.5H130M130 107.5H140M130 112.5H140M140 107.5H150M140 112.5H150M157 100V112.5H150M153 100V107.5H150M163 100V112.5H170M167 100V107.5H170M170 107.5H180M170 112.5H180M187 100V112.5H180M183 100V107.5H180M213 100V112.5H220M217 100V107.5H220M220 107.5H230M220 112.5H230M230 107.5H240M230 112.5H240M240 107.5H250M240 112.5H250M257 100V112.5H250M253 100V107.5H250M293 100V112.5H300M297 100V107.5H300M300 107.5H310M300 112.5H310M317 100V112.5H310M313 100V107.5H310M353 100V112.5H360M357 100V107.5H360M360 107.5H370M360 112.5H370M377 100V112.5H370M373 100V107.5H370M433 100V112.5H440M437 100V107.5H440M440 107.5H450M440 112.5H450M457 100V112.5H450M453 100V107.5H450M483 100V112.5H490M487 100V107.5H490M490 107.5H500M490 112.5H500M507 100V112.5H500M503 100V107.5H500M513 100V112.5H520M517 100V107.5H520M520 107.5H530M520 112.5H530M530 107.5H540M530 112.5H540M540 107.5H550M540 112.5H550M550 107.5H560M550 112.5H560M560 107.5H570M560 112.5H570M570 107.5H580M570 112.5H580M587 100V112.5H580M583 100V107.5H580M593 100V112.5H600M597 100V107.5H600M600 107.5H610M600 112.5H610M610 107.5H620M610 112.5H620M620 107.5H630M620 112.5H630M630 107.5H640M630 112.5H640M640 107.5H650M640 112.5H650M650 107.5H660M650 112.5H660M667 100V112.5H660M663 100V107.5H660" fill="none" stroke="#2563eb" stroke-width="1.6"/></svg>
+            <div class="slogan">Living rent free in your AI agents</div>
+            <span class="frameLabel">CLI · TypeScript SDK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
