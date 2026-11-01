@@ -3,13 +3,15 @@
 Memory for AI agents, from the terminal. An agent logs what it sees and what you give it; rentfree turns that into searchable, attributable memories and hands back the right context for its next turn, within a token budget.
 
 ```sh
-npm install -g rentfree
+npm install -g @rentfree/cli
 rf init                       # opens the browser; a first sign-in is a sign-up
 rf agents create claude-code --use
 rf hooks install              # Claude Code starts each session with its memory
 ```
 
 The binary is `rf`. It is one file with no dependencies and starts in about 60 ms, so an agent can call it on every turn.
+
+This package used to be `rentfree`. If you have that installed, remove it first with `npm uninstall -g rentfree`: both install `rf`, and npm will not install one over the other.
 
 ## What it does
 

@@ -3,7 +3,7 @@
 Memory for AI agents, from the terminal. An agent logs what it sees and what you give it; rentfree turns that into searchable, attributable memories and hands back the right context for the next turn, within a token budget.
 
 ```
-npm install -g rentfree
+npm install -g @rentfree/cli
 rf init
 ```
 
@@ -13,7 +13,7 @@ rf init
 
 | Path                                                   | What it is                                                                           | On npm                                                         |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| `packages/cli`                                         | `rf`, the command line                                                               | [`rentfree`](https://www.npmjs.com/package/rentfree)           |
+| `packages/cli`                                         | `rf`, the command line                                                               | [`@rentfree/cli`](https://www.npmjs.com/package/@rentfree/cli) |
 | `packages/sdk`                                         | The API's contract, its OpenAPI document, and the TypeScript client `rf` is built on | [`@rentfree/sdk`](https://www.npmjs.com/package/@rentfree/sdk) |
 | `packages/eslint-config`, `packages/typescript-config` | The configs both build with                                                          |                                                                |
 

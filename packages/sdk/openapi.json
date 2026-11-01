@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "rentfree",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "summary": "Memory for AI agents.",
     "description": "Agents log what they see and what they are given; rentfree turns it into searchable, attributable memories and hands back the context for the next turn, within a token budget. Every request under /v1 carries an API key as a bearer. Every POST under /v1 that writes takes an Idempotency-Key header."
   },

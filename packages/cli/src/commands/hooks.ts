@@ -127,7 +127,7 @@ const install = Command.make(
     const installed = rentfreeHooks(next);
     if (!(yield* onPath(environment))) {
       yield* Console.error(
-        "Note: rf is not on your PATH, and Claude Code runs hooks through your shell. Install it with `npm install -g rentfree`.",
+        "Note: rf is not on your PATH, and Claude Code runs hooks through your shell. Install it with `npm install -g @rentfree/cli`.",
       );
     }
     yield* print(

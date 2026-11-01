@@ -1,6 +1,6 @@
 {
-  "name": "rentfree",
-  "version": "0.0.1",
+  "name": "@rentfree/cli",
+  "version": "0.0.2",
   "description": "The rentfree CLI, rf: memory for AI agents, from the terminal.",
   "license": "MIT",
   "type": "module",

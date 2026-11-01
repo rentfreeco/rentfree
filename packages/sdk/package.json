@@ -1,6 +1,6 @@
 {
   "name": "@rentfree/sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The rentfree api's contract and TypeScript client: memory for AI agents.",
   "license": "MIT",
   "repository": {

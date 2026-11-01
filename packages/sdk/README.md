@@ -47,7 +47,7 @@ const found = await rf.search({ query: "deploy" });
 
 ## Documentation
 
-[rentfree.dev/docs/api](https://rentfree.dev/docs/api) is the API reference, generated from the same contract. The [`rentfree`](https://www.npmjs.com/package/rentfree) CLI is built on this package.
+[rentfree.dev/docs/api](https://rentfree.dev/docs/api) is the API reference, generated from the same contract. The [`@rentfree/cli`](https://www.npmjs.com/package/@rentfree/cli) CLI is built on this package.
 
 ## Licence
 

@@ -1,6 +1,6 @@
 name: Release
 
-# Publishes `@rentfree/sdk` and `rentfree` to npm when a version tag is
+# Publishes `@rentfree/sdk` and `@rentfree/cli` to npm when a version tag is
 # pushed, such as `v0.0.2`, then creates the GitHub release for the tag.
 # Both packages carry the same version, and the tag must match it.
 #
@@ -56,7 +56,7 @@ jobs:
 
       - name: Lint, type-check, and test the two packages
         run: |
-          pnpm turbo run lint check-types test --filter=@rentfree/sdk --filter=rentfree
+          pnpm turbo run lint check-types test --filter=@rentfree/sdk --filter=@rentfree/cli
 
       # Trusted publishing needs npm 11.5.1 or newer.
       - name: Update npm
@@ -69,7 +69,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/packs"
           pnpm --filter @rentfree/sdk pack --pack-destination "$RUNNER_TEMP/packs"
-          pnpm --filter rentfree pack --pack-destination "$RUNNER_TEMP/packs"
+          pnpm --filter @rentfree/cli pack --pack-destination "$RUNNER_TEMP/packs"
           ls -l "$RUNNER_TEMP/packs"
 
       # The SDK first: nothing depends on the CLI, and a failure here leaves
@@ -77,8 +77,8 @@ jobs:
       - name: Publish @rentfree/sdk
         run: .github/scripts/publish-once.sh @rentfree/sdk "$RUNNER_TEMP/packs/rentfree-sdk-${GITHUB_REF_NAME#v}.tgz"
 
-      - name: Publish rentfree
-        run: .github/scripts/publish-once.sh rentfree "$RUNNER_TEMP/packs/rentfree-${GITHUB_REF_NAME#v}.tgz"
+      - name: Publish @rentfree/cli
+        run: .github/scripts/publish-once.sh @rentfree/cli "$RUNNER_TEMP/packs/rentfree-cli-${GITHUB_REF_NAME#v}.tgz"
 
   github-release:
     name: Create the GitHub release
@@ -103,4 +103,4 @@ jobs:
             --verify-tag \
             --title "$GITHUB_REF_NAME" \
             --generate-notes \
-            --notes "Published to npm: [rentfree](https://www.npmjs.com/package/rentfree/v/${GITHUB_REF_NAME#v}) and [@rentfree/sdk](https://www.npmjs.com/package/@rentfree/sdk/v/${GITHUB_REF_NAME#v})."
+            --notes "Published to npm: [@rentfree/cli](https://www.npmjs.com/package/@rentfree/cli/v/${GITHUB_REF_NAME#v}) and [@rentfree/sdk](https://www.npmjs.com/package/@rentfree/sdk/v/${GITHUB_REF_NAME#v})."

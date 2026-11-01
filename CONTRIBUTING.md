@@ -27,7 +27,7 @@ The SDK's contract, in `packages/sdk/src/contract`, describes the API the servic
 
 ## Releasing
 
-For maintainers. `rentfree` and `@rentfree/sdk` are released together, at one version, by `.github/workflows/release.yml` when a tag like `v0.0.2` is pushed here. The workflow checks that the tag matches both versions, lints, type-checks, and tests the two packages, packs them with pnpm, and publishes each tarball through npm's trusted publishing, with a provenance statement. A version npm already has is skipped rather than failed, by `.github/scripts/publish-once.sh`, so a run is safe to repeat. A second job then creates the GitHub release, with notes from the pull requests since the last tag.
+For maintainers. `@rentfree/cli` and `@rentfree/sdk` are released together, at one version, by `.github/workflows/release.yml` when a tag like `v0.0.2` is pushed here. The workflow checks that the tag matches both versions, lints, type-checks, and tests the two packages, packs them with pnpm, and publishes each tarball through npm's trusted publishing, with a provenance statement. A version npm already has is skipped rather than failed, by `.github/scripts/publish-once.sh`, so a run is safe to repeat. A second job then creates the GitHub release, with notes from the pull requests since the last tag.
 
 To release:
 
