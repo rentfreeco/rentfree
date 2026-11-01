@@ -54,7 +54,7 @@ export interface Client extends ReturnType<typeof createClient> {}
 /**
  * A rentfree client. Every method is one route of the contract, typed by
  * its schemas, except the few that are more than one request: `addFile`,
- * `waitReady`, `waitForRecap`, and the `all` iterators.
+ * `waitReady`, `runAndWait`, and the `all` iterators.
  *
  * ```ts
  * const rf = createClient({ apiKey: process.env.RF_API_KEY });
