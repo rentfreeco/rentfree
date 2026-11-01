@@ -1,0 +1,21 @@
+{
+  "name": "rentfree-workspace",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "check-types": "turbo run check-types",
+    "format": "prettier --write \"**/*.{ts,md}\""
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "turbo": "^2.11.7",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24"
+  }
+}

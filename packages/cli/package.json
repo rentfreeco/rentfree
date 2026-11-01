@@ -1,0 +1,53 @@
+{
+  "name": "rentfree",
+  "version": "0.0.1",
+  "description": "The rentfree CLI, rf: memory for AI agents, from the terminal.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "rf": "./dist/rf.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rentfreeco/rentfree.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://rentfree.dev/docs",
+  "keywords": [
+    "rentfree",
+    "memory",
+    "ai",
+    "agents",
+    "claude-code",
+    "cli"
+  ],
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/rf.mjs --banner:js='#!/usr/bin/env node' --log-level=warning && chmod +x dist/rf.mjs",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "prepack": "pnpm build"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "~4.0.5",
+    "@rentfree/sdk": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "26.4.1",
+    "effect": "~4.0.5",
+    "esbuild": "^0.28.2",
+    "eslint": "10.9.1",
+    "typescript": "7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

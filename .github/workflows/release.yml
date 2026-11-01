@@ -1,0 +1,106 @@
+name: Release
+
+# Publishes `@rentfree/sdk` and `rentfree` to npm when a version tag is
+# pushed, such as `v0.0.2`, then creates the GitHub release for the tag.
+# Both packages carry the same version, and the tag must match it.
+#
+# Publishing uses npm's trusted publishing: npm trusts this workflow in
+# rentfreeco/rentfree, configured on each package's settings page, so no npm
+# token is stored anywhere. Each package gets a provenance statement linking
+# it to the commit and the run that built it, which npm only gives a public
+# repository, and only when the packages' `repository` fields name it.
+#
+# Every step can run again safely. A version npm already has is skipped
+# rather than failed, so tagging a version that was published by hand, as
+# the first release had to be, is a green run; a release that already
+# exists is left as it is.
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  TURBO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm
+    permissions:
+      contents: read
+      # The OIDC token npm exchanges for a short-lived publish token.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Check the tag matches both versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          for pkg in packages/sdk packages/cli; do
+            version=$(node -p "require('./$pkg/package.json').version")
+            if [ "$version" != "$tag" ]; then
+              echo "::error::$pkg is at $version, but the tag is v$tag"
+              exit 1
+            fi
+          done
+
+      - name: Lint, type-check, and test the two packages
+        run: |
+          pnpm turbo run lint check-types test --filter=@rentfree/sdk --filter=rentfree
+
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      # pnpm packs, which builds through prepack and rewrites the workspace's
+      # catalog and workspace versions into real ones; npm publishes the
+      # tarball, which is what speaks trusted publishing.
+      - name: Pack
+        run: |
+          mkdir -p "$RUNNER_TEMP/packs"
+          pnpm --filter @rentfree/sdk pack --pack-destination "$RUNNER_TEMP/packs"
+          pnpm --filter rentfree pack --pack-destination "$RUNNER_TEMP/packs"
+          ls -l "$RUNNER_TEMP/packs"
+
+      # The SDK first: nothing depends on the CLI, and a failure here leaves
+      # both unpublished rather than one.
+      - name: Publish @rentfree/sdk
+        run: .github/scripts/publish-once.sh @rentfree/sdk "$RUNNER_TEMP/packs/rentfree-sdk-${GITHUB_REF_NAME#v}.tgz"
+
+      - name: Publish rentfree
+        run: .github/scripts/publish-once.sh rentfree "$RUNNER_TEMP/packs/rentfree-${GITHUB_REF_NAME#v}.tgz"
+
+  github-release:
+    name: Create the GitHub release
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # The only job that may write to the repository, and only to make the
+    # release; it checks out nothing.
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Create the release, with notes from the pull requests since the last tag
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME exists already; leaving it as it is."
+            exit 0
+          fi
+          gh release create "$GITHUB_REF_NAME" \
+            --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --notes "Published to npm: [rentfree](https://www.npmjs.com/package/rentfree/v/${GITHUB_REF_NAME#v}) and [@rentfree/sdk](https://www.npmjs.com/package/@rentfree/sdk/v/${GITHUB_REF_NAME#v})."

@@ -1,0 +1,14 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+allowBuilds:
+  '@swc/core': true
+  cbor-extract: true
+  esbuild: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - hono@4.13.13
+catalog:
+  # One zod for the workspace: the api and the SDK share schemas, and two
+  # copies would make their types incompatible.
+  zod: ^4.4.3

@@ -1,0 +1,73 @@
+{
+  "name": "@rentfree/sdk",
+  "version": "0.0.1",
+  "description": "The rentfree api's contract and TypeScript client: memory for AI agents.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rentfreeco/rentfree.git",
+    "directory": "packages/sdk"
+  },
+  "homepage": "https://rentfree.dev/docs/api",
+  "keywords": [
+    "rentfree",
+    "memory",
+    "ai",
+    "agents",
+    "llm",
+    "sdk"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./contract": "./src/contract/index.ts",
+    "./openapi.json": "./openapi.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "./contract": {
+        "types": "./dist/contract/index.d.ts",
+        "default": "./dist/contract/index.js"
+      },
+      "./openapi.json": "./openapi.json",
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "dist",
+    "openapi.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "rm -rf dist && esbuild src/index.ts src/contract/index.ts --bundle --splitting --format=esm --platform=neutral --target=es2022 --outdir=dist --outbase=src --external:zod --log-level=warning && tsc -p tsconfig.build.json && node scripts/fix-declarations.mjs",
+    "prepack": "pnpm build",
+    "openapi": "tsx scripts/openapi.ts",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@seriousme/openapi-schema-validator": "^2.11.0",
+    "@types/node": "26.4.1",
+    "esbuild": "^0.28.2",
+    "eslint": "10.9.1",
+    "tsx": "^4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
